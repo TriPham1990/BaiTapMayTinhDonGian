@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ứng dụng máy tính</title>
+</head>
+<body>
+<fieldset style="color:chartreuse; background: azure; width: 230px; height: 280px;">
+<table>
+    <tr>
+        <th colspan="4"><input style="color: blue; background: white; width: 215px; height: 50px; font-size: 30px"
+                               id="display"></th>
+    </tr>
+    <br>
+    <tr>
+        <td>
+            <button style="color: red; background: white; width: 50px;height: 40px" onclick="clickNumber(1)">1</button>
+        </td>
+        <td>
+            <button style="color: red; background: white; width: 50px;height: 40px" onclick="clickNumber(2)">2</button>
+        </td>
+        <td>
+            <button style="color: red; background: white; width: 50px;height: 40px" onclick="clickNumber(3)">3</button>
+        </td>
+        <td>
+            <button style="color: red; background: white; width: 50px;height: 40px" onclick="clickOperator('+')">+
+            </button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button style="color: red; background: white; width: 50px;height: 40px" onclick="clickNumber(4)">4</button>
+        </td>
+        <td>
+            <button style="color: red; background: white; width: 50px;height: 40px" onclick="clickNumber(5)">5</button>
+        </td>
+        <td>
+            <button style="color: red; background: white; width: 50px;height: 40px" onclick="clickNumber(6)">6</button>
+        </td>
+        <td>
+            <button style="color: red; background: white; width: 50px;height: 40px" onclick="clickOperator('-')">-
+            </button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button style="color: red; background: white; width: 50px;height: 40px" onclick="clickNumber(7)">7</button>
+        </td>
+        <td>
+            <button style="color: red; background: white; width: 50px;height: 40px" onclick="clickNumber(8)">8</button>
+        </td>
+        <td>
+            <button style="color: red; background: white; width: 50px;height: 40px" onclick="clickNumber(9)">9</button>
+        </td>
+        <td>
+            <button style="color: red; background: white; width: 50px;height: 40px" onclick="clickOperator('*')">*
+            </button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button style="color: red; background: white; width: 50px;height: 40px" onclick="reset()">C</button>
+        </td>
+        <td>
+            <button style="color: red; background: white; width: 50px;height: 40px" onclick="clickNumber(0)">0</button>
+        </td>
+        <td>
+            <button style="color: red; background: white; width: 50px;height: 40px" onclick="clickOperator('/')">/
+            </button>
+        </td>
+        <td>
+            <button style="color: red; background: white; width: 50px;height: 40px" onclick="clickEqual()">=</button>
+        </td>
+    </tr>
+</table>
+</fieldset>
+<script>
+    let display = document.getElementById("display");
+    let isClickOperator = false;
+    let isClickEqual = false;
+    let operator;
+    let firstNumber;
+    let lastNumber;
+    let result;
+
+
+    function reset() {
+        display.value = ' ';
+        isClickOperator = false;
+        isClickEqual = false;
+        operator = '';
+        firstNumber = undefined;
+        lastNumber = undefined;
+    }
+
+    function clickNumber(number) {
+        if (isClickOperator == true) {
+            firstNumber = display.value;
+            display.value = number;
+            isClickOperator = false;
+        } else {
+            display.value += number;
+        }
+    }
+
+    function clickOperator(operatorValue) {
+        isClickOperator = true;
+        operator = operatorValue;
+        isClickEqual = false;
+    }
+
+    function clickEqual() {
+        if (isClickEqual) {
+            firstNumber = parseInt(display.value);
+        } else {
+            firstNumber = parseInt(firstNumber);
+            lastNumber = parseInt(display.value);
+        }
+
+        switch (operator) {
+            case '+':
+                result = firstNumber + lastNumber;
+                break;
+            case '-':
+                result = firstNumber - lastNumber;
+                break;
+            case '*':
+                result = firstNumber * lastNumber;
+                break;
+            case '/':
+                result = firstNumber / lastNumber;
+                break;
+        }
+        display.value = result;
+        isClickEqual = true;
+    }
+</script>
+</body>
+</html>
